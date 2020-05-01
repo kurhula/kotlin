@@ -25,7 +25,7 @@ public class UltraLightScriptLoadingTestGenerated extends AbstractUltraLightScri
     }
 
     public void testAllFilesPresentInUltraLightClasses() throws Exception {
-        KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/asJava/ultraLightClasses"), Pattern.compile("^(.+)\\.(kt|kts)$"), null, true);
+        KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/asJava/ultraLightScripts"), Pattern.compile("^(.+)\\.(kt|kts)$"), null, true);
     }
 
     @TestMetadata("HelloWorld.kts")
