@@ -75,7 +75,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 artifacts {
     runtime libraryJarWithIr
     archives libraryJarWithIr
-    publishedLibrary libraryJarWithIr
+    publishedRuntime libraryJarWithIr
     distLibrary libraryJarWithoutIr
     distJs(file(compileKotlin2Js.kotlinOptions.outputFile)) {
         builtBy(compileKotlin2Js)

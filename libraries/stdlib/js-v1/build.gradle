@@ -16,7 +16,6 @@ configurations {
     distSources
     distJs
     distLibrary
-    publishedArtifacts
 }
 
 def builtinsSrcDir = "${buildDir}/builtin-sources"
@@ -309,8 +308,8 @@ task distSourcesJar(type: Jar) {
 
 artifacts {
     runtime libraryJarWithIr
-    publishedLibrary libraryJarWithIr
-    publishedLibrary sourcesJar
+    publishedRuntime libraryJarWithIr
+    publishedRuntime sourcesJar
     sources sourcesJar
     distSources distSourcesJar
     distLibrary libraryJarWithoutIr

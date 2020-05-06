@@ -10,7 +10,7 @@ plugins {
 publish()
 
 val default = configurations.getByName(Dependency.DEFAULT_CONFIGURATION)
-default.extendsFrom(configurations.publishedLibrary.get())
+default.extendsFrom(configurations.publishedRuntime.get())
 
 dependencies {
     if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
@@ -83,5 +83,5 @@ val jar by tasks.creating(Jar::class) {
 
 artifacts {
     add(configurations.archives.name, jar)
-    add(configurations.publishedLibrary.name, jar)
+    add(configurations.publishedRuntime.name, jar)
 }

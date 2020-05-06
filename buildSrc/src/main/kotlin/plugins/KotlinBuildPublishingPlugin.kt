@@ -41,17 +41,10 @@ class KotlinBuildPublishingPlugin @Inject constructor(
             }
         }
 
-        val publishedLibrary = configurations.maybeCreate(LIBRARY_CONFIGURATION).apply {
-            attributes {
-                attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
-            }
-        }
-
         val kotlinLibraryComponent = componentFactory.adhoc(ADHOC_COMPONENT_NAME) as AdhocComponentWithVariants
         components.add(kotlinLibraryComponent)
         kotlinLibraryComponent.addVariantsFromConfiguration(publishedCompile) { mapToMavenScope("compile") }
         kotlinLibraryComponent.addVariantsFromConfiguration(publishedRuntime) { mapToMavenScope("runtime") }
-        kotlinLibraryComponent.addVariantsFromConfiguration(publishedLibrary) { mapToMavenScope("runtime") }
 
         pluginManager.withPlugin("java-base") {
             val runtimeElements by configurations
@@ -149,6 +142,5 @@ class KotlinBuildPublishingPlugin @Inject constructor(
 
         const val COMPILE_CONFIGURATION = "publishedCompile"
         const val RUNTIME_CONFIGURATION = "publishedRuntime"
-        const val LIBRARY_CONFIGURATION = "publishedLibrary"
     }
 }
