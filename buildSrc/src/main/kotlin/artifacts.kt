@@ -86,6 +86,7 @@ fun <T : Jar> Project.runtimeJar(task: TaskProvider<T>, body: T.() -> Unit = {})
 
     tasks.named<Jar>("jar").configure {
         removeArtifacts(configurations.getOrCreate("archives"), this)
+        removeArtifacts(configurations.getOrCreate("runtimeElements"), this)
     }
 
     task.configure {
