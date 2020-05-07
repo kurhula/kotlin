@@ -7,7 +7,6 @@ package plugins
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.attributes.Category
 import org.gradle.api.attributes.Usage
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.component.SoftwareComponentFactory
@@ -30,12 +29,16 @@ class KotlinBuildPublishingPlugin @Inject constructor(
         apply<SigningPlugin>()
 
         val publishedRuntime = configurations.maybeCreate(RUNTIME_CONFIGURATION).apply {
+            isCanBeConsumed = false
+            isCanBeResolved = false
             attributes {
                 attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
             }
         }
 
         val publishedCompile = configurations.maybeCreate(COMPILE_CONFIGURATION).apply {
+            isCanBeConsumed = false
+            isCanBeResolved = false
             attributes {
                 attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_API))
             }

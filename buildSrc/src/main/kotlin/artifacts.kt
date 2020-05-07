@@ -10,6 +10,7 @@ import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.artifacts.component.ProjectComponentIdentifier
 import org.gradle.api.attributes.Bundling
 import org.gradle.api.attributes.Category
+import org.gradle.api.attributes.LibraryElements
 import org.gradle.api.attributes.Usage
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.file.DuplicatesStrategy
@@ -108,6 +109,7 @@ fun <T : Jar> Project.runtimeJar(task: TaskProvider<T>, body: T.() -> Unit = {})
             attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
             attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements.JAR))
         }
     }
 
@@ -184,8 +186,11 @@ fun Project.javadocJar(body: Jar.() -> Unit = {}): TaskProvider<Jar> {
 
 fun Project.modularJar(body: Jar.() -> Unit): TaskProvider<Jar> {
     val modularJar = configurations.maybeCreate("modularJar").apply {
+        isCanBeConsumed = true
+        isCanBeResolved = false
         attributes {
             attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("modular-jar"))
         }
     }
 
