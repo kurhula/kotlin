@@ -114,7 +114,7 @@ class MethodSignatureMapper(private val context: JvmBackendContext) {
     private fun getModuleName(function: IrFunction): String =
         // TODO: get rid of descriptors here
         (if (function is IrLazyFunctionBase)
-            getJvmModuleNameForDeserializedDescriptor(function.descriptor)
+            getJvmModuleNameForDeserializedDescriptor(function.symbol.trueDescriptor)
         else null) ?: context.state.moduleName
 
     private fun IrFunction.isPublishedApi(): Boolean =

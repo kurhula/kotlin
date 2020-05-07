@@ -92,8 +92,8 @@ class IrConstructorPublicSymbolImpl(descriptor: ClassConstructorDescriptor, sig:
 class IrPropertyPublicSymbolImpl(descriptor: PropertyDescriptor, sig: IdSignature) :
     IrBindablePublicSymbolBase<PropertyDescriptor, IrProperty>(
         descriptor, sig, { d ->
-            if (d is DescriptorWithContainerSource && d.containerSource != null)
-                WrappedPropertyDescriptorWithContainerSource(d.containerSource!!)
+            if (d is DescriptorWithContainerSource)
+                WrappedPropertyDescriptorWithContainerSource(d.containerSource)
             else
                 WrappedPropertyDescriptor(d.annotations, d.source)
         }
